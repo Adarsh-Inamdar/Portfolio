@@ -1,23 +1,11 @@
-// Loading Spinner
-window.addEventListener("load", function () {
-    document.getElementById("loading-spinner").style.display = "none";
-    document.querySelectorAll(".content").forEach(section => {
-        section.classList.add("visible");
-    });
-});
-
-// Intersection Observer for animations on scroll
-const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
+document.addEventListener("DOMContentLoaded", function() {
+    const links = document.querySelectorAll("nav ul li a");
+    links.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({ behavior: "smooth" });
         });
-    },
-    { threshold: 0.5 }
-);
-
-document.querySelectorAll(".fade-in, .slide-in").forEach(section => {
-    observer.observe(section);
+    });
 });
